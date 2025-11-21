@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>تسجيل الدخول</title>
+
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+
+<script>
+// ⚠️ ضع إعدادات Firebase الخاصة بك هنا (من Project Settings → Web)
+const firebaseConfig = {
+  apiKey: "AIzaSyAfW-Ee2BySrXc2CYus_hqVd3gjeDaFh48",
+  authDomain: "fd-nace.firebaseapp.com",
+  projectId: "fd-nace",
+  storageBucket: "fd-nace.firebasestorage.app",
+  messagingSenderId: "834107744864",
+  appId: "1:834107744864:web:a404f53279c6366cd99905"
+};
+
+firebase.initializeApp(firebaseConfig);
+let auth = firebase.auth();
+</script>
+
+<style>
+body { font-family: Arial; direction: rtl; text-align: center; padding: 20px; }
+input { width: 90%; padding: 10px; margin: 10px; border-radius: 6px; }
+button { padding: 12px; width: 90%; background: purple; color: white; border: none; border-radius: 6px; }
+</style>
+</head>
+
+<body>
+<h2>تسجيل الدخول</h2>
+
+<input id="email" type="email" placeholder="البريد الإلكتروني">
+<input id="password" type="password" placeholder="كلمة المرور">
+
+<button onclick="login()">تسجيل الدخول</button>
+<button onclick="signup()" style="background:#444;">إنشاء حساب</button>
+
+<p id="msg"></p>
+
+<script>
+function login(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, pass)
+  .then(()=>{ document.getElementById("msg").innerHTML="تم تسجيل الدخول ✓"; })
+  .catch(e=>{ document.getElementById("msg").innerHTML=e.message; });
+}
+
+function signup(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  auth.createUserWithEmailAndPassword(email, pass)
+  .then(()=>{ document.getElementById("msg").innerHTML="تم إنشاء الحساب ✓"; })
+  .catch(e=>{ document.getElementById("msg").innerHTML=e.message; });
+}
+</script>
+
+</body>
+</html>
